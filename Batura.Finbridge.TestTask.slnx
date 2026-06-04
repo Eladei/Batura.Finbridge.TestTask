@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="Batura.Finbridge.TestTask.Api.Contracts/Batura.Finbridge.TestTask.Api.Contracts.csproj" Id="773d78b9-7424-4761-bc25-0f138c422ba1" />
+  <Project Path="Batura.Finbridge.TestTask.Model/Batura.Finbridge.TestTask.Model.csproj" Id="9f1acdf1-c81e-40f0-8fba-fb1beb2ed6c2" />
 </Solution>
