@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Batura.Finbridge.TestTask.Model.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20260604195026_InitialMigration")]
+    [Migration("20260604234001_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -63,9 +63,6 @@ namespace Batura.Finbridge.TestTask.Model.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("CorrelationId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAtUtc")
