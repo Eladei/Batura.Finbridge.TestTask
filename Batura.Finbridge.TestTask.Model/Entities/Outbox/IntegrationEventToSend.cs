@@ -19,11 +19,6 @@ public class IntegrationEventToSend : EntityBase
     public Guid EntityId { get; set; }
 
     /// <summary>
-    /// Идентификатор для распределённой трассировки
-    /// </summary>
-    public Guid CorrelationId { get; set; }
-
-    /// <summary>
     /// Тип события
     /// </summary>
     [Required]
