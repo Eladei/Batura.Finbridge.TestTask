@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -83,9 +84,9 @@ public partial class InitialMigration : Migration
             column: "UserId");
 
         migrationBuilder.CreateIndex(
-            name: "IX_Users_FirstName_LastName_MiddleName",
+            name: "IX_Users_FirstName_LastName_MiddleName_BirthDate",
             table: "Users",
-            columns: new[] { "FirstName", "LastName", "MiddleName" },
+            columns: new[] { "FirstName", "LastName", "MiddleName", "BirthDate" },
             unique: true);
     }
 

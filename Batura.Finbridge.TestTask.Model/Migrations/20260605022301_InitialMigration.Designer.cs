@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Batura.Finbridge.TestTask.Model.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20260604234001_InitialMigration")]
+    [Migration("20260605022301_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -150,7 +150,7 @@ namespace Batura.Finbridge.TestTask.Model.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FirstName", "LastName", "MiddleName")
+                    b.HasIndex("FirstName", "LastName", "MiddleName", "BirthDate")
                         .IsUnique();
 
                     b.ToTable("Users");

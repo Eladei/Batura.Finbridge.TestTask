@@ -147,7 +147,7 @@ namespace Batura.Finbridge.TestTask.Model.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FirstName", "LastName", "MiddleName")
+                    b.HasIndex("FirstName", "LastName", "MiddleName", "BirthDate")
                         .IsUnique();
 
                     b.ToTable("Users");
