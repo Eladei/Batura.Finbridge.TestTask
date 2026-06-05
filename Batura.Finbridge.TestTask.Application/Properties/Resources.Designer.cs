@@ -22,7 +22,7 @@ namespace Batura.Finbridge.TestTask.Application.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Batura.Finbridge.TestTask.Application.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Batura.Finbridge.TestTask.Application.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Batura.Finbridge.TestTask.Application.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,9 +61,18 @@ namespace Batura.Finbridge.TestTask.Application.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Дата рождения пользователя не указана.
+        /// </summary>
+        public static string BirthPlaceNotDefined {
+            get {
+                return ResourceManager.GetString("BirthPlaceNotDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Не удалось создать контекст базы данных.
         /// </summary>
-        internal static string CantCreateDbContext {
+        public static string CantCreateDbContext {
             get {
                 return ResourceManager.GetString("CantCreateDbContext", resourceCulture);
             }
@@ -72,7 +81,7 @@ namespace Batura.Finbridge.TestTask.Application.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Выполнение команды &apos;{0}&apos; было отменено.
         /// </summary>
-        internal static string CommandExecutingCancelled {
+        public static string CommandExecutingCancelled {
             get {
                 return ResourceManager.GetString("CommandExecutingCancelled", resourceCulture);
             }
@@ -81,7 +90,7 @@ namespace Batura.Finbridge.TestTask.Application.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Произошла ошибка при выполнении команды &apos;{0}&apos;.
         /// </summary>
-        internal static string CommandExecutingError {
+        public static string CommandExecutingError {
             get {
                 return ResourceManager.GetString("CommandExecutingError", resourceCulture);
             }
@@ -90,7 +99,7 @@ namespace Batura.Finbridge.TestTask.Application.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Выполнение команды &apos;{0}&apos; начато.
         /// </summary>
-        internal static string CommandExecutingStarted {
+        public static string CommandExecutingStarted {
             get {
                 return ResourceManager.GetString("CommandExecutingStarted", resourceCulture);
             }
@@ -99,16 +108,43 @@ namespace Batura.Finbridge.TestTask.Application.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Выполнение команды &apos;{0}&apos; успешно завершено.
         /// </summary>
-        internal static string CommandExecutingSuccessfullyFinished {
+        public static string CommandExecutingSuccessfullyFinished {
             get {
                 return ResourceManager.GetString("CommandExecutingSuccessfullyFinished", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Имя пользователя не указано.
+        /// </summary>
+        public static string FirstNameNotDefined {
+            get {
+                return ResourceManager.GetString("FirstNameNotDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Фамилия пользователя не указана.
+        /// </summary>
+        public static string LastNameNotDefined {
+            get {
+                return ResourceManager.GetString("LastNameNotDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отчество пользователя не указано.
+        /// </summary>
+        public static string MiddleNameNotDefined {
+            get {
+                return ResourceManager.GetString("MiddleNameNotDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ошибка логики выполнения операции &apos;{0}&apos;.
         /// </summary>
-        internal static string OperationLogicError {
+        public static string OperationLogicError {
             get {
                 return ResourceManager.GetString("OperationLogicError", resourceCulture);
             }
@@ -117,7 +153,7 @@ namespace Batura.Finbridge.TestTask.Application.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Выполнение запроса &apos;{0}&apos; было отменено.
         /// </summary>
-        internal static string QueryExecutingCancelled {
+        public static string QueryExecutingCancelled {
             get {
                 return ResourceManager.GetString("QueryExecutingCancelled", resourceCulture);
             }
@@ -126,7 +162,7 @@ namespace Batura.Finbridge.TestTask.Application.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Произошла ошибка при выполнении запроса &apos;{0}&apos;.
         /// </summary>
-        internal static string QueryExecutingError {
+        public static string QueryExecutingError {
             get {
                 return ResourceManager.GetString("QueryExecutingError", resourceCulture);
             }
@@ -135,7 +171,7 @@ namespace Batura.Finbridge.TestTask.Application.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Выполнение запроса &apos;{0}&apos; начато.
         /// </summary>
-        internal static string QueryExecutingStarted {
+        public static string QueryExecutingStarted {
             get {
                 return ResourceManager.GetString("QueryExecutingStarted", resourceCulture);
             }
@@ -144,16 +180,25 @@ namespace Batura.Finbridge.TestTask.Application.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Выполнение запроса &apos;{0}&apos; успешно завершено.
         /// </summary>
-        internal static string QueryExecutingSuccessfullyFinished {
+        public static string QueryExecutingSuccessfullyFinished {
             get {
                 return ResourceManager.GetString("QueryExecutingSuccessfullyFinished", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пользователь уже зарегистрирован с полным именем = &apos;{0}&apos; и датой рождения = &apos;{1}&apos;.
+        /// </summary>
+        public static string UserAlreadyExists {
+            get {
+                return ResourceManager.GetString("UserAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ошибка валидации в &apos;{0}&apos;.
         /// </summary>
-        internal static string ValidationError {
+        public static string ValidationError {
             get {
                 return ResourceManager.GetString("ValidationError", resourceCulture);
             }

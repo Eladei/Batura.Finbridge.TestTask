@@ -8,15 +8,17 @@ namespace Batura.Finbridge.TestTask.Model;
 /// <summary>
 /// Контекст базы данных для работы с пользователями
 /// </summary>
-public sealed class UserDbContext : DbContext
+public class UserDbContext : DbContext
 {
+    public UserDbContext() : base() { }
+
     public UserDbContext(DbContextOptions<UserDbContext> options) : base(options) { }
 
-    public DbSet<User> Users { get; set; }
+    public virtual DbSet<User> Users { get; set; }
 
-    public DbSet<BalanceHistory> BalanceHistories { get; set; }
+    public virtual DbSet<BalanceHistory> BalanceHistories { get; set; }
 
-    public DbSet<IntegrationEventToSend> IntegrationEvents { get; set; }
+    public virtual DbSet<IntegrationEventToSend> IntegrationEvents { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
