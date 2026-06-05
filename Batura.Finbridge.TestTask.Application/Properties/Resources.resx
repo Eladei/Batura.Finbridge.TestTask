@@ -135,6 +135,18 @@
   <data name="OperationLogicError" xml:space="preserve">
     <value>Ошибка логики выполнения операции '{0}'</value>
   </data>
+  <data name="QueryExecutingCancelled" xml:space="preserve">
+    <value>Выполнение запроса '{0}' было отменено</value>
+  </data>
+  <data name="QueryExecutingError" xml:space="preserve">
+    <value>Произошла ошибка при выполнении запроса '{0}'</value>
+  </data>
+  <data name="QueryExecutingStarted" xml:space="preserve">
+    <value>Выполнение запроса '{0}' начато</value>
+  </data>
+  <data name="QueryExecutingSuccessfullyFinished" xml:space="preserve">
+    <value>Выполнение запроса '{0}' успешно завершено</value>
+  </data>
   <data name="ValidationError" xml:space="preserve">
     <value>Ошибка валидации в '{0}'</value>
   </data>

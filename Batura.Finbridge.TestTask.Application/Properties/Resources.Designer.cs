@@ -115,6 +115,42 @@ namespace Batura.Finbridge.TestTask.Application.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Выполнение запроса &apos;{0}&apos; было отменено.
+        /// </summary>
+        internal static string QueryExecutingCancelled {
+            get {
+                return ResourceManager.GetString("QueryExecutingCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Произошла ошибка при выполнении запроса &apos;{0}&apos;.
+        /// </summary>
+        internal static string QueryExecutingError {
+            get {
+                return ResourceManager.GetString("QueryExecutingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выполнение запроса &apos;{0}&apos; начато.
+        /// </summary>
+        internal static string QueryExecutingStarted {
+            get {
+                return ResourceManager.GetString("QueryExecutingStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выполнение запроса &apos;{0}&apos; успешно завершено.
+        /// </summary>
+        internal static string QueryExecutingSuccessfullyFinished {
+            get {
+                return ResourceManager.GetString("QueryExecutingSuccessfullyFinished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ошибка валидации в &apos;{0}&apos;.
         /// </summary>
         internal static string ValidationError {
