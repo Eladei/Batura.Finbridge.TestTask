@@ -10,12 +10,11 @@ public static class BalanceValidator
     /// <summary>
     /// Проверяет корректность баланса пользователя
     /// </summary>
-    /// <param name="currentBalance">Текущий баланс</param>
     /// <param name="newBalance">Новый баланс</param>
     /// <param name="balanceLimit">Лимит баланса</param>
     /// <param name="error">Сообщение об ошибке</param>
     /// <returns>Показатель корректности баланса пользователя</returns>
-    public static bool Validate(decimal currentBalance, decimal newBalance, decimal balanceLimit, out string? error)
+    public static bool Validate(decimal newBalance, decimal balanceLimit, out string? error)
     {
         error = null;
 

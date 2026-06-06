@@ -14,7 +14,7 @@ public sealed class RegisterUserCommandTests
     [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
-    public Task Command_Should_Throw_ArgumentException_When_FirstName_Not_Defined(string firstName)
+    public void Command_Should_Throw_ArgumentException_When_FirstName_Not_Defined(string firstName)
     {
         // Arrange
         var id = Guid.NewGuid();
@@ -28,15 +28,13 @@ public sealed class RegisterUserCommandTests
             => new RegisterUserCommand(firstName, lastName, middleName, birthDate, birthPlace));
 
         exception.Message.ShouldBe(Resources.FirstNameNotDefined);
-
-        return Task.CompletedTask;
     }
 
     [Theory]
     [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
-    public Task Command_Should_Throw_ArgumentException_When_LastName_Not_Defined(string lastName)
+    public void Command_Should_Throw_ArgumentException_When_LastName_Not_Defined(string lastName)
     {
         // Arrange
         var id = Guid.NewGuid();
@@ -50,15 +48,13 @@ public sealed class RegisterUserCommandTests
             => new RegisterUserCommand(firstName, lastName, middleName, birthDate, birthPlace));
 
         exception.Message.ShouldBe(Resources.LastNameNotDefined);
-
-        return Task.CompletedTask;
     }
 
     [Theory]
     [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
-    public Task Command_Should_Throw_ArgumentException_When_MiddleName_Not_Defined(string middleName)
+    public void Command_Should_Throw_ArgumentException_When_MiddleName_Not_Defined(string middleName)
     {
         // Arrange
         var firstName = "Иван";
@@ -71,15 +67,13 @@ public sealed class RegisterUserCommandTests
             => new RegisterUserCommand(firstName, lastName, middleName, birthDate, birthPlace));
 
         exception.Message.ShouldBe(Resources.MiddleNameNotDefined);
-
-        return Task.CompletedTask;
     }
 
     [Theory]
     [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
-    public Task Command_Should_Throw_ArgumentException_When_BirthPlace_Not_Defined(string birthPlace)
+    public void Command_Should_Throw_ArgumentException_When_BirthPlace_Not_Defined(string birthPlace)
     {
         // Arrange
         var id = Guid.NewGuid();
@@ -93,7 +87,5 @@ public sealed class RegisterUserCommandTests
             => new RegisterUserCommand(firstName, lastName, middleName, birthDate, birthPlace));
 
         exception.Message.ShouldBe(Resources.BirthPlaceNotDefined);
-
-        return Task.CompletedTask;
     }
 }

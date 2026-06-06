@@ -41,7 +41,13 @@ public sealed class ChangeBalanceCommand : CommandBase<UserDbContext>
 
         var balanceLimit = _balanceLimitProvider.GetBalanceLimit();
 
-        var newBalance = BalanceCalculator.CalculateBalance(user.Balance, _delta, balanceLimit);
+        var newBalance = user.Balance + _delta;
+
+        var isBalanceValid = BalanceValidator.Validate(
+            newBalance, balanceLimit, out var error);
+
+        if (!isBalanceValid)
+            throw new OperationLogicException(error!);
 
         var balanceBefore = user.Balance;
         user.Balance = newBalance;
