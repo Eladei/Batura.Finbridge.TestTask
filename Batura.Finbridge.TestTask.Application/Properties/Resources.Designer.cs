@@ -61,6 +61,24 @@ namespace Batura.Finbridge.TestTask.Application.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Баланс пользователя не может быть меньше 0. UserId = &apos;{0}&apos;, NewBalance = &apos;{1}&apos;.
+        /// </summary>
+        public static string BalanceCannotBeNegative {
+            get {
+                return ResourceManager.GetString("BalanceCannotBeNegative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Баланс пользователя не может быть больше максимального значения. UserId = &apos;{0}&apos;, NewBalance = &apos;{1}&apos;, BalanceLimit = &apos;{2}&apos;.
+        /// </summary>
+        public static string BalanceCannotExceedLimit {
+            get {
+                return ResourceManager.GetString("BalanceCannotExceedLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Дата рождения пользователя не указана.
         /// </summary>
         public static string BirthPlaceNotDefined {
@@ -75,6 +93,15 @@ namespace Batura.Finbridge.TestTask.Application.Properties {
         public static string CantCreateDbContext {
             get {
                 return ResourceManager.GetString("CantCreateDbContext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка обновления баланса нескольких пользователей: &apos;{0}&apos;.
+        /// </summary>
+        public static string ChangeBalancesError {
+            get {
+                return ResourceManager.GetString("ChangeBalancesError", resourceCulture);
             }
         }
         
@@ -192,6 +219,15 @@ namespace Batura.Finbridge.TestTask.Application.Properties {
         public static string UserAlreadyExists {
             get {
                 return ResourceManager.GetString("UserAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пользователь не найден с Id = &apos;{0}&apos;.
+        /// </summary>
+        public static string UserNotFoundById {
+            get {
+                return ResourceManager.GetString("UserNotFoundById", resourceCulture);
             }
         }
         

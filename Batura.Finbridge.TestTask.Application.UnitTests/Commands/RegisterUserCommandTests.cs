@@ -1,4 +1,4 @@
-﻿using Batura.Finbridge.TestTask.Application.Commands;
+﻿using Batura.Finbridge.TestTask.Application.Commands.Users;
 using Batura.Finbridge.TestTask.Application.Properties;
 using Batura.Finbridge.TestTask.Model;
 using Batura.Finbridge.TestTask.Model.Entities;
