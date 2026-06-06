@@ -13,7 +13,7 @@ public sealed class ChangeBalanceCommand : CommandBase<UserDbContext>
 {
     private readonly Guid _userId;
     private readonly decimal _delta;
-    private readonly BalanceValidator _balanceValidator;
+    private readonly IBalanceLimitProvider _balanceLimitProvider;
 
     /// <summary>
     /// Создает объект класса <see cref="ChangeBalanceCommand"/>
@@ -25,7 +25,8 @@ public sealed class ChangeBalanceCommand : CommandBase<UserDbContext>
         IBalanceLimitProvider balanceLimitProvider,
         Guid userId, decimal delta)
     {
-        _balanceValidator = new BalanceValidator(balanceLimitProvider);
+        _balanceLimitProvider = balanceLimitProvider
+            ?? throw new ArgumentNullException(nameof(balanceLimitProvider));
 
         _userId = userId;
         _delta = delta;
@@ -38,12 +39,9 @@ public sealed class ChangeBalanceCommand : CommandBase<UserDbContext>
             .FirstOrDefaultAsync(u => u.Id == _userId, cancellationToken)
             ?? throw new OperationLogicException(Resources.UserNotFoundById, _userId);
 
-        var newBalance = user.Balance + _delta;
+        var balanceLimit = _balanceLimitProvider.GetBalanceLimit();
 
-        var isBalanceValid = _balanceValidator.Validate(user.Balance, newBalance, out var error);
-
-        if (!isBalanceValid)
-            throw new OperationLogicException(error!);
+        var newBalance = BalanceCalculator.CalculateBalance(user.Balance, _delta, balanceLimit);
 
         var balanceBefore = user.Balance;
         user.Balance = newBalance;

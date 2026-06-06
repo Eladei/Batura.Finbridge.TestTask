@@ -166,7 +166,7 @@
     <value>Пользователь уже зарегистрирован с полным именем = '{0}' и датой рождения = '{1}'</value>
   </data>
   <data name="UserNotFoundById" xml:space="preserve">
-    <value>Пользователь не найден с Id = '{0}'</value>
+    <value>Не найден пользователь с Id = '{0}'</value>
   </data>
   <data name="BalanceCannotBeNegative" xml:space="preserve">
     <value>Баланс пользователя не может быть меньше 0. UserId = '{0}', NewBalance = '{1}'</value>
@@ -174,7 +174,10 @@
   <data name="BalanceCannotExceedLimit" xml:space="preserve">
     <value>Баланс пользователя не может быть больше максимального значения. UserId = '{0}', NewBalance = '{1}', BalanceLimit = '{2}'</value>
   </data>
-  <data name="ChangeBalancesError" xml:space="preserve">
-    <value>Ошибка обновления баланса нескольких пользователей: '{0}'</value>
+  <data name="UsersDublicatedInBalanceUpdate" xml:space="preserve">
+    <value>При обновлении баланса указаны повторяющиеся пользователи</value>
+  </data>
+  <data name="UsersNotFoundByIds" xml:space="preserve">
+    <value>Не найдены пользователи с Id = '{0}'</value>
   </data>
 </root>

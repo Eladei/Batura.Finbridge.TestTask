@@ -3,7 +3,7 @@
 /// <summary>
 /// Информация для изменения баланса пользователя
 /// </summary>
-public sealed record UserBalanceUpdateItem
+public sealed record BalanceUpdateItem
 {
     /// <summary>
     /// Идентификатор пользователя

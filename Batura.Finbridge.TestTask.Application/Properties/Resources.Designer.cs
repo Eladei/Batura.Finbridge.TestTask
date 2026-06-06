@@ -97,15 +97,6 @@ namespace Batura.Finbridge.TestTask.Application.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ошибка обновления баланса нескольких пользователей: &apos;{0}&apos;.
-        /// </summary>
-        public static string ChangeBalancesError {
-            get {
-                return ResourceManager.GetString("ChangeBalancesError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Выполнение команды &apos;{0}&apos; было отменено.
         /// </summary>
         public static string CommandExecutingCancelled {
@@ -223,11 +214,29 @@ namespace Batura.Finbridge.TestTask.Application.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Пользователь не найден с Id = &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Не найден пользователь с Id = &apos;{0}&apos;.
         /// </summary>
         public static string UserNotFoundById {
             get {
                 return ResourceManager.GetString("UserNotFoundById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to При обновлении баланса указаны повторяющиеся пользователи.
+        /// </summary>
+        public static string UsersDublicatedInBalanceUpdate {
+            get {
+                return ResourceManager.GetString("UsersDublicatedInBalanceUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не найдены пользователи с Id = &apos;{0}&apos;.
+        /// </summary>
+        public static string UsersNotFoundByIds {
+            get {
+                return ResourceManager.GetString("UsersNotFoundByIds", resourceCulture);
             }
         }
         

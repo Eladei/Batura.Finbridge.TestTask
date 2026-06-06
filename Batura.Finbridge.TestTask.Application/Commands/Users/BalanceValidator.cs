@@ -5,27 +5,17 @@ namespace Batura.Finbridge.TestTask.Application.Commands.Users;
 /// <summary>
 /// Валидатор баланса пользователя
 /// </summary>
-public sealed class BalanceValidator
+public static class BalanceValidator
 {
-    private readonly IBalanceLimitProvider _balanceLimitProvider;
-
     /// <summary>
-    /// Создает объект класса <see cref="BalanceValidator"/>
-    /// </summary>
-    /// <param name="balanceLimitProvider">Провайдер лимита баланса пользователя</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    public BalanceValidator(IBalanceLimitProvider balanceLimitProvider)
-    {
-        _balanceLimitProvider = balanceLimitProvider
-            ?? throw new ArgumentNullException(nameof(balanceLimitProvider));
-    }
-
-    /// <summary>
-    /// Проверяет, что новый баланс не превышает лимит и не уходит в минус
+    /// Проверяет корректность баланса пользователя
     /// </summary>
     /// <param name="currentBalance">Текущий баланс</param>
     /// <param name="newBalance">Новый баланс</param>
-    public bool Validate(decimal currentBalance, decimal newBalance, out string? error)
+    /// <param name="balanceLimit">Лимит баланса</param>
+    /// <param name="error">Сообщение об ошибке</param>
+    /// <returns>Показатель корректности баланса пользователя</returns>
+    public static bool Validate(decimal currentBalance, decimal newBalance, decimal balanceLimit, out string? error)
     {
         error = null;
 
@@ -35,8 +25,6 @@ public sealed class BalanceValidator
 
             return false;
         }
-
-        var balanceLimit = _balanceLimitProvider.GetBalanceLimit();
 
         if (newBalance > balanceLimit)
         {
