@@ -1,4 +1,4 @@
-﻿using Batura.Finbridge.TestTask.Application.Commands;
+﻿using Batura.Finbridge.TestTask.Application.Commands.Users;
 using Batura.Finbridge.TestTask.Application.Exceptions;
 using Batura.Finbridge.TestTask.Model;
 using Batura.Finbridge.TestTask.Model.Entities;
@@ -47,6 +47,7 @@ public sealed class RegisterUserCommandTests : NpgsqlIntegrationTestsBase<UserDb
         var exception = await Assert.ThrowsAsync<OperationLogicException>(
             () => command.BeforeExecuteAsync(context, CancellationToken.None));
 
+        exception.ShouldNotBeNull();
         exception.Message.ShouldBe(expectedError);
     }
 

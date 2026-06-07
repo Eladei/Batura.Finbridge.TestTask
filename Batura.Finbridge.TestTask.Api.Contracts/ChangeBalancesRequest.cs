@@ -8,5 +8,5 @@ public sealed record ChangeBalancesRequest
     /// <summary>
     /// Информация для изменения баланса пользователей
     /// </summary>
-    public UserBalanceUpdateItem[] Items { get; init; } = [];
+    public BalanceUpdateItem[] Items { get; init; } = [];
 }

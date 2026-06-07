@@ -4,7 +4,7 @@ using Batura.Finbridge.TestTask.Model;
 using Batura.Finbridge.TestTask.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Batura.Finbridge.TestTask.Application.Commands;
+namespace Batura.Finbridge.TestTask.Application.Commands.Users;
 
 /// <summary>
 /// Добавляет нового пользователя в систему
@@ -18,7 +18,7 @@ public sealed class RegisterUserCommand : CommandBase<UserDbContext>
     private readonly string _birthPlace;
 
     /// <summary>
-    /// Создает объект класса RegisterUserCommand
+    /// Создает объект класса <see cref="RegisterUserCommand"/>
     /// </summary>
     /// <param name="firstName">Имя</param>
     /// <param name="lastName">Фамилия</param>
@@ -60,11 +60,13 @@ public sealed class RegisterUserCommand : CommandBase<UserDbContext>
                     && s.BirthDate == _birthDate,
                 cancellationToken);
 
-        var fullName = $"{_firstName} {_lastName} {_middleName}";
-
         if (userExists)
+        {
+            var fullName = $"{_firstName} {_lastName} {_middleName}";
+
             throw new OperationLogicException(
                 Resources.UserAlreadyExists, fullName, _birthDate);
+        }
     }
 
     /// </inheritdoc>
@@ -80,6 +82,6 @@ public sealed class RegisterUserCommand : CommandBase<UserDbContext>
             BirthPlace = _birthPlace
         };
 
-        await context.Users.AddAsync(newUser, cancellationToken);
+        context.Users.Add(newUser);
     }
 }
