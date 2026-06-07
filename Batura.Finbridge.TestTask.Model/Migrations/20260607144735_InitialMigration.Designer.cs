@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Batura.Finbridge.TestTask.Model.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20260605022301_InitialMigration")]
+    [Migration("20260607144735_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -37,7 +37,7 @@ namespace Batura.Finbridge.TestTask.Model.Migrations
                     b.Property<decimal>("BalanceBefore")
                         .HasColumnType("numeric");
 
-                    b.Property<DateTime>("ChangedAt")
+                    b.Property<DateTime>("ChangedAtUtc")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("CreatedAtUtc")

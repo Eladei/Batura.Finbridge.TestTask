@@ -1,7 +1,8 @@
 ﻿using Batura.Finbridge.TestTask.Application.Properties;
-using Batura.Finbridge.TestTask.Application.Queries;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+
+namespace Batura.Finbridge.TestTask.Application.Queries;
 
 /// <summary>
 /// Исполнитель запросов для работы с Entity Framework

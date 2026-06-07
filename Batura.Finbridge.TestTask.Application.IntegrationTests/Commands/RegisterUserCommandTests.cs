@@ -27,7 +27,7 @@ public sealed class RegisterUserCommandTests : NpgsqlIntegrationTestsBase<UserDb
             LastName = "Иванов",
             MiddleName = "Иванович",
             BirthDate = new DateOnly(1985, 6, 6),
-            BirthPlace = "Moscow"
+            BirthPlace = "Москва"
         };
 
         using var context = CreateContext();

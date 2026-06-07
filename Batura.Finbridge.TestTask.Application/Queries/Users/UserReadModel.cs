@@ -1,9 +1,9 @@
-﻿namespace Batura.Finbridge.TestTask.Api.Contracts;
+﻿namespace Batura.Finbridge.TestTask.Application.Queries.Users;
 
 /// <summary>
-/// Информация о зарегистрированном пользователе
+/// Модель данных для чтения информации о пользователе
 /// </summary>
-public sealed record User
+public record UserReadModel
 {
     /// <summary>
     /// Идентификатор пользователя

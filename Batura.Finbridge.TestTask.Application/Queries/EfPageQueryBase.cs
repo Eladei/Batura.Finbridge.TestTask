@@ -1,6 +1,6 @@
-﻿using Batura.Finbridge.TestTask.Application.Queries;
+﻿using Microsoft.EntityFrameworkCore;
 
-using Microsoft.EntityFrameworkCore;
+namespace Batura.Finbridge.TestTask.Application.Queries;
 
 /// <summary>
 /// Базовый постраничный запрос для работы с Entity Framework
