@@ -17,7 +17,6 @@ namespace Batura.Finbridge.TestTask.Model.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     EntityId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CorrelationId = table.Column<Guid>(type: "uuid", nullable: false),
                     EventType = table.Column<string>(type: "text", nullable: false),
                     EventMetadata = table.Column<string>(type: "text", nullable: false),
                     IsSent = table.Column<bool>(type: "boolean", nullable: false),
@@ -63,7 +62,7 @@ namespace Batura.Finbridge.TestTask.Model.Migrations
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     BalanceBefore = table.Column<decimal>(type: "numeric", nullable: false),
                     BalanceAfter = table.Column<decimal>(type: "numeric", nullable: false),
-                    ChangedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ChangedAtUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Version = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAtUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ModifiedAtUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
@@ -85,9 +84,9 @@ namespace Batura.Finbridge.TestTask.Model.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_FirstName_LastName_MiddleName",
+                name: "IX_Users_FirstName_LastName_MiddleName_BirthDate",
                 table: "Users",
-                columns: new[] { "FirstName", "LastName", "MiddleName" },
+                columns: new[] { "FirstName", "LastName", "MiddleName", "BirthDate" },
                 unique: true);
         }
 

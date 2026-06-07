@@ -8,7 +8,7 @@ namespace Batura.Finbridge.TestTask.Model;
 /// <summary>
 /// Контекст базы данных для работы с пользователями
 /// </summary>
-public sealed class UserDbContext : DbContext
+public class UserDbContext : DbContext
 {
     public UserDbContext(DbContextOptions<UserDbContext> options) : base(options) { }
 

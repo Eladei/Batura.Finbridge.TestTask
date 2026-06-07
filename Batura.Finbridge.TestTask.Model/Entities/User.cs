@@ -6,7 +6,7 @@ namespace Batura.Finbridge.TestTask.Model.Entities;
 /// <summary>
 /// Информация о пользователе
 /// </summary>
-[Index(nameof(FirstName), nameof(LastName), nameof(MiddleName), IsUnique = true)]
+[Index(nameof(FirstName), nameof(LastName), nameof(MiddleName), nameof(BirthDate), IsUnique = true)]
 public class User : EntityBase
 {
     /// <summary>
