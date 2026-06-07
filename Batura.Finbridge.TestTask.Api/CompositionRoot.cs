@@ -1,4 +1,5 @@
-﻿using Batura.Finbridge.TestTask.Infrastructure.Messaging;
+﻿using Batura.Finbridge.TestTask.Infrastructure.Logging;
+using Batura.Finbridge.TestTask.Infrastructure.Messaging;
 using Batura.Finbridge.TestTask.Infrastructure.Outbox;
 using Batura.Finbridge.TestTask.Model;
 using Confluent.Kafka;
@@ -110,6 +111,6 @@ public static class CompositionRoot
                 rollingInterval: RollingInterval.Day,
                 outputTemplate: fileOutputTemplate)); // File format
 
-        //appBuilder.Services.AddTransient<ICorrelationContext, CorrelationContext>();
+        appBuilder.Services.AddTransient<ICorrelationContext, CorrelationContext>();
     }
 }
