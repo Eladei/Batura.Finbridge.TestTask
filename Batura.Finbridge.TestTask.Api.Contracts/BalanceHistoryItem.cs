@@ -6,14 +6,29 @@
 public sealed record BalanceHistoryItem
 {
     /// <summary>
+    /// Идентификатор изменения баланса
+    /// </summary>
+    public Guid Id { get; init; }
+
+    /// <summary>
     /// Идентификатор пользователя
     /// </summary>
     public Guid UserId { get; init; }
 
     /// <summary>
-    /// Полное имя пользователя
+    /// Имя
     /// </summary>
-    public string FullName { get; init; } = string.Empty;
+    public string FirstName { get; init; } = string.Empty;
+
+    /// <summary>
+    /// Фамилия
+    /// </summary>
+    public string LastName { get; init; } = string.Empty;
+
+    /// <summary>
+    /// Отчество
+    /// </summary>
+    public string MiddleName { get; init; } = string.Empty;
 
     /// <summary>
     /// Баланс до изменения
@@ -26,7 +41,7 @@ public sealed record BalanceHistoryItem
     public decimal BalanceAfter { get; init; }
 
     /// <summary>
-    /// Время изменения баланса
+    /// Время изменения баланса в UTC
     /// </summary>
-    public DateTime ChangedAt { get; init; }
+    public DateTime ChangedAtUtc { get; init; }
 }

@@ -1,24 +1,34 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Batura.Finbridge.TestTask.Model.Entities;
+﻿namespace Batura.Finbridge.TestTask.Application.Queries.Users;
 
 /// <summary>
 /// Информация об изменении баланса пользователя
 /// </summary>
-public class BalanceHistory : EntityBase
+public sealed record BalanceHistoryItemReadModel
 {
     /// <summary>
-    /// Идентификатор записи об изменении баланса
+    /// Идентификатор изменения баланса
     /// </summary>
-    [Key]
-    public Guid Id { get; set; }
+    public Guid Id { get; init; }
 
     /// <summary>
     /// Идентификатор пользователя
     /// </summary>
-    [Required]
     public Guid UserId { get; init; }
+
+    /// <summary>
+    /// Имя
+    /// </summary>
+    public string FirstName { get; init; } = string.Empty;
+
+    /// <summary>
+    /// Фамилия
+    /// </summary>
+    public string LastName { get; init; } = string.Empty;
+
+    /// <summary>
+    /// Отчество
+    /// </summary>
+    public string MiddleName { get; init; } = string.Empty;
 
     /// <summary>
     /// Баланс до изменения
@@ -33,12 +43,5 @@ public class BalanceHistory : EntityBase
     /// <summary>
     /// Время изменения баланса в UTC
     /// </summary>
-    [Required]
     public DateTime ChangedAtUtc { get; init; }
-
-    /// <summary>
-    /// Пользователь, которому принадлежит баланс
-    /// </summary>
-    [ForeignKey(nameof(UserId))]
-    public User User { get; init; } = null!;
 }

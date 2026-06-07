@@ -34,7 +34,7 @@ namespace Batura.Finbridge.TestTask.Model.Migrations
                     b.Property<decimal>("BalanceBefore")
                         .HasColumnType("numeric");
 
-                    b.Property<DateTime>("ChangedAt")
+                    b.Property<DateTime>("ChangedAtUtc")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("CreatedAtUtc")

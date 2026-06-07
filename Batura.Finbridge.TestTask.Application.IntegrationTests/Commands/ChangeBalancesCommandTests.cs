@@ -200,12 +200,10 @@ public sealed class ChangeBalancesCommandTests : NpgsqlIntegrationTestsBase<User
         var idUser1 = Guid.NewGuid();
         var deltaUser1 = 50m;
         var balanceBeforeUser1 = 100m;
-        var expectedBalanceUser1 = 150m;
 
         var idUser2 = Guid.NewGuid();
         var deltaUser2 = 70m;
         var balanceBeforeUser2 = 60m;
-        var expectedBalanceUser2 = 130m;
 
         using var context = CreateContext();
 
