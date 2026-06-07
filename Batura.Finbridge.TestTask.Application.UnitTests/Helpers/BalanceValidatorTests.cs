@@ -18,9 +18,9 @@ public sealed class BalanceValidatorTests
         decimal balanceLimit = 200m;
 
         // Act, Assert
-        var result = BalanceValidator.Validate(newBalance, balanceLimit, out _);
+        var result = BalanceValidator.Validate(newBalance, balanceLimit);
 
-        result.ShouldBe(true);
+        result.ShouldBe(BalanceValidationResult.Valid);
     }
 
     [Fact]
@@ -33,10 +33,9 @@ public sealed class BalanceValidatorTests
         var expectedError = Resources.BalanceCannotBeNegative;
 
         // Act, Assert
-        var result = BalanceValidator.Validate(newBalance, balanceLimit, out var error);
+        var result = BalanceValidator.Validate(newBalance, balanceLimit);
 
-        result.ShouldBe(false);
-        error.ShouldBe(expectedError);
+        result.ShouldBe(BalanceValidationResult.NegativeBalance);
     }
 
     [Fact]
@@ -49,9 +48,8 @@ public sealed class BalanceValidatorTests
         var expectedError = Resources.BalanceCannotExceedLimit;
 
         // Act, Assert
-        var result = BalanceValidator.Validate(newBalance, balanceLimit, out var error);
+        var result = BalanceValidator.Validate(newBalance, balanceLimit);
 
-        result.ShouldBe(false);
-        error.ShouldBe(expectedError);
+        result.ShouldBe(BalanceValidationResult.BalanceLimitExceeded);
     }
 }

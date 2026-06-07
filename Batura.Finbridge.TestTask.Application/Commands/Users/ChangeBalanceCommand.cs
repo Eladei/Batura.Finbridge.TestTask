@@ -43,11 +43,14 @@ public sealed class ChangeBalanceCommand : CommandBase<UserDbContext>
 
         var newBalance = user.Balance + _delta;
 
-        var isBalanceValid = BalanceValidator.Validate(
-            newBalance, balanceLimit, out var error);
+        var validationResult = BalanceValidator.Validate(newBalance, balanceLimit);
 
-        if (!isBalanceValid)
-            throw new OperationLogicException(error!);
+        if (validationResult == BalanceValidationResult.NegativeBalance)
+            throw new OperationLogicException(Resources.BalanceCannotBeNegative, _userId, newBalance);
+
+        if (validationResult == BalanceValidationResult.BalanceLimitExceeded)
+            throw new OperationLogicException(
+                Resources.BalanceCannotExceedLimit, _userId, newBalance, balanceLimit);
 
         var balanceBefore = user.Balance;
         user.Balance = newBalance;

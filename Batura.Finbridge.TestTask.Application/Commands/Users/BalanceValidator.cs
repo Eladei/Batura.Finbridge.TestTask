@@ -12,26 +12,15 @@ public static class BalanceValidator
     /// </summary>
     /// <param name="newBalance">Новый баланс</param>
     /// <param name="balanceLimit">Лимит баланса</param>
-    /// <param name="error">Сообщение об ошибке</param>
-    /// <returns>Показатель корректности баланса пользователя</returns>
-    public static bool Validate(decimal newBalance, decimal balanceLimit, out string? error)
+    /// <returns> баланса пользователя</returns>
+    public static BalanceValidationResult Validate(decimal newBalance, decimal balanceLimit)
     {
-        error = null;
-
         if (newBalance < 0)
-        {
-            error = Resources.BalanceCannotBeNegative;
-
-            return false;
-        }
+            return BalanceValidationResult.NegativeBalance;
 
         if (newBalance > balanceLimit)
-        {
-            error = Resources.BalanceCannotExceedLimit;
+            return BalanceValidationResult.BalanceLimitExceeded;
 
-            return false;
-        }
-
-        return true;
+        return BalanceValidationResult.Valid;
     }
 }
