@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="Batura.Finbridge.TestTask.Api.Contracts/Batura.Finbridge.TestTask.Api.Contracts.csproj" Id="773d78b9-7424-4761-bc25-0f138c422ba1" />
+  <Project Path="Batura.Finbridge.TestTask.Api/Batura.Finbridge.TestTask.Api.csproj" Id="f3458c15-7ceb-424a-aa4c-f971405e7168" />
   <Project Path="Batura.Finbridge.TestTask.Application.IntegrationTests/Batura.Finbridge.TestTask.Application.IntegrationTests.csproj" Id="a3572b8e-4244-4270-b734-fe004770b7a0" />
   <Project Path="Batura.Finbridge.TestTask.Application.UnitTests/Batura.Finbridge.TestTask.Application.UnitTests.csproj" Id="5836e65f-a7cf-4a2d-8f19-0cf2d9323b90" />
   <Project Path="Batura.Finbridge.TestTask.Application/Batura.Finbridge.TestTask.Application.csproj" Id="33fcfe7b-0d42-49b7-b147-8531062329c3" />

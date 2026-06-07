@@ -8,25 +8,25 @@ public sealed record RegisterUserRequest
     /// <summary>
     /// Имя
     /// </summary>
-    public string FirstName { get; init; } = string.Empty;
+    public required string FirstName { get; init; }
 
     /// <summary>
     /// Фамилия
     /// </summary>
-    public string LastName { get; init; } = string.Empty;
+    public required string LastName { get; init; }
 
     /// <summary>
     /// Отчество
     /// </summary>
-    public string MiddleName { get; init; } = string.Empty;
+    public required string MiddleName { get; init; }
 
     /// <summary>
     /// Дата рождения
     /// </summary>
-    public DateOnly BirthDate { get; init; }
+    public required DateOnly BirthDate { get; init; }
 
     /// <summary>
     /// Место рождения
     /// </summary>
-    public string BirthPlace { get; init; } = string.Empty;
+    public required string BirthPlace { get; init; }
 }
