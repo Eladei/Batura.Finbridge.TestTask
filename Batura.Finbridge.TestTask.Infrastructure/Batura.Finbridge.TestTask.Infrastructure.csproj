@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Batura.Finbridge.TestTask.Application\Batura.Finbridge.TestTask.Application.csproj" />
+    <ProjectReference Include="..\Batura.Finbridge.TestTask.Model\Batura.Finbridge.TestTask.Model.csproj" />
+  </ItemGroup>
+
+</Project>
