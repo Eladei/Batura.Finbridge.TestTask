@@ -3,5 +3,6 @@
   <Project Path="Batura.Finbridge.TestTask.Application.IntegrationTests/Batura.Finbridge.TestTask.Application.IntegrationTests.csproj" Id="a3572b8e-4244-4270-b734-fe004770b7a0" />
   <Project Path="Batura.Finbridge.TestTask.Application.UnitTests/Batura.Finbridge.TestTask.Application.UnitTests.csproj" Id="5836e65f-a7cf-4a2d-8f19-0cf2d9323b90" />
   <Project Path="Batura.Finbridge.TestTask.Application/Batura.Finbridge.TestTask.Application.csproj" Id="33fcfe7b-0d42-49b7-b147-8531062329c3" />
+  <Project Path="Batura.Finbridge.TestTask.Infrastructure/Batura.Finbridge.TestTask.Infrastructure.csproj" Id="b4cfed23-3d0a-4c20-81f8-d233e6db6ca9" />
   <Project Path="Batura.Finbridge.TestTask.Model/Batura.Finbridge.TestTask.Model.csproj" Id="9f1acdf1-c81e-40f0-8fba-fb1beb2ed6c2" />
 </Solution>
