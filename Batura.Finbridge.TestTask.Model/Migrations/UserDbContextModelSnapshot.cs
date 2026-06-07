@@ -46,8 +46,11 @@ namespace Batura.Finbridge.TestTask.Model.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.Property<long>("Version")
-                        .HasColumnType("bigint");
+                    b.Property<uint>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("xid")
+                        .HasColumnName("xmin");
 
                     b.HasKey("Id");
 
@@ -97,8 +100,11 @@ namespace Batura.Finbridge.TestTask.Model.Migrations
                     b.Property<DateTime?>("SentAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<long>("Version")
-                        .HasColumnType("bigint");
+                    b.Property<uint>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("xid")
+                        .HasColumnName("xmin");
 
                     b.HasKey("Id");
 

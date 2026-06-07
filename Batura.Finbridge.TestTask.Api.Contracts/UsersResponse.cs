@@ -13,5 +13,5 @@ public sealed record UsersResponse
     /// <summary>
     /// Общее количество страниц
     /// </summary>
-    public int TotalPages { get; init; }
+    public uint TotalPages { get; init; }
 }

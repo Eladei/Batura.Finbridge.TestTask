@@ -34,7 +34,7 @@ public sealed class ChangeBalancesCommand : CommandBase<UserDbContext>
         _updateInfosByUserId = balanceUpdateInfos.ToDictionary(x => x.UserId);
     }
 
-    /// </inheritdoc>
+    /// <inheritdoc/>
     public override async Task ExecuteAsync(UserDbContext context, CancellationToken cancellationToken)
     {
         var userIds = _updateInfosByUserId.Keys.ToArray();
@@ -46,6 +46,8 @@ public sealed class ChangeBalancesCommand : CommandBase<UserDbContext>
         ThrowIfUsersNotFound(users, userIds);
 
         var balanceLimit = _balanceLimitProvider.GetBalanceLimit();
+
+        var operationDate = DateTime.UtcNow;
 
         foreach (var user in users)
         {
@@ -65,9 +67,18 @@ public sealed class ChangeBalancesCommand : CommandBase<UserDbContext>
             var balanceBefore = user.Balance;
             user.Balance = newBalance;
 
+            context.BalanceHistories.Add(new BalanceHistory 
+            { 
+                Id = Guid.NewGuid(),
+                UserId = user.Id,
+                BalanceBefore = balanceBefore,
+                BalanceAfter = newBalance,
+                ChangedAtUtc = operationDate
+            });
+
             var balanceWasChangedEvent = new UserBalanceWasChangedIntegrationEvent(
                 user.Id, user.FirstName, user.LastName, user.MiddleName,
-                balanceBefore, newBalance, DateTime.UtcNow);
+                balanceBefore, newBalance, operationDate);
 
             var outboxEvent = IntegrationEventConverter.Convert(balanceWasChangedEvent);
 

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Batura.Finbridge.TestTask.Model.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20260607144735_InitialMigration")]
+    [Migration("20260607223103_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -49,8 +49,11 @@ namespace Batura.Finbridge.TestTask.Model.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.Property<long>("Version")
-                        .HasColumnType("bigint");
+                    b.Property<uint>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("xid")
+                        .HasColumnName("xmin");
 
                     b.HasKey("Id");
 
@@ -100,8 +103,11 @@ namespace Batura.Finbridge.TestTask.Model.Migrations
                     b.Property<DateTime?>("SentAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<long>("Version")
-                        .HasColumnType("bigint");
+                    b.Property<uint>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("xid")
+                        .HasColumnName("xmin");
 
                     b.HasKey("Id");
 

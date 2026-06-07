@@ -1,4 +1,9 @@
-﻿using Batura.Finbridge.TestTask.Infrastructure.Logging;
+﻿using Batura.Finbridge.TestTask.Application;
+using Batura.Finbridge.TestTask.Application.Commands;
+using Batura.Finbridge.TestTask.Application.Commands.Users;
+using Batura.Finbridge.TestTask.Application.Queries;
+using Batura.Finbridge.TestTask.Infrastructure.Balances;
+using Batura.Finbridge.TestTask.Infrastructure.Logging;
 using Batura.Finbridge.TestTask.Infrastructure.Messaging;
 using Batura.Finbridge.TestTask.Infrastructure.Outbox;
 using Batura.Finbridge.TestTask.Model;
@@ -8,7 +13,6 @@ using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Events;
 using System.Reflection;
-using System.Reflection.PortableExecutable;
 
 namespace Batura.Finbridge.TestTask.Api;
 
@@ -39,8 +43,15 @@ public static class CompositionRoot
 
         SetUpEventBus(appBuilder);
 
+        SetBalanceOptions(appBuilder);
+
         appBuilder.Services.Configure<OutboxOptions>(
             appBuilder.Configuration.GetSection("Outbox"));
+
+        appBuilder.Services.AddTransient<ICommandExecutor<UserDbContext>, CommandExecutor<UserDbContext>>();
+
+        appBuilder.Services.AddTransient<IQueryExecutor<UserDbContext>, QueryExecutor<UserDbContext>>();
+        appBuilder.Services.AddTransient<IOperationExecutor, OperationExecutor>();
     }
 
     /// <summary>
@@ -64,7 +75,8 @@ public static class CompositionRoot
     {
         appBuilder.Services.AddSingleton(provider =>
         {
-            var options = provider.GetRequiredService<IOptions<KafkaOptions>>().Value!;
+            var options = provider.GetRequiredService<IOptions<KafkaOptions>>().Value
+                ?? throw new InvalidOperationException("Не настроены параметры Kafka");
 
             var producerConfig = new ProducerConfig()
             {
@@ -112,5 +124,12 @@ public static class CompositionRoot
                 outputTemplate: fileOutputTemplate)); // File format
 
         appBuilder.Services.AddTransient<ICorrelationContext, CorrelationContext>();
+    }
+
+    private static void SetBalanceOptions(WebApplicationBuilder appBuilder)
+    {
+        appBuilder.Services.Configure<BalanceOptions>(
+            appBuilder.Configuration.GetSection("Balance"));
+        appBuilder.Services.AddTransient<IBalanceLimitProvider, BalanceLimitProvider>();
     }
 }

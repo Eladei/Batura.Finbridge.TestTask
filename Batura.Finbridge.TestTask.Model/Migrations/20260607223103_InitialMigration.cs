@@ -25,7 +25,7 @@ namespace Batura.Finbridge.TestTask.Model.Migrations
                     LastError = table.Column<string>(type: "text", nullable: true),
                     ReservedBy = table.Column<Guid>(type: "uuid", nullable: true),
                     ReservedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    Version = table.Column<long>(type: "bigint", nullable: false),
+                    xmin = table.Column<uint>(type: "xid", rowVersion: true, nullable: false),
                     CreatedAtUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ModifiedAtUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
@@ -63,7 +63,7 @@ namespace Batura.Finbridge.TestTask.Model.Migrations
                     BalanceBefore = table.Column<decimal>(type: "numeric", nullable: false),
                     BalanceAfter = table.Column<decimal>(type: "numeric", nullable: false),
                     ChangedAtUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Version = table.Column<long>(type: "bigint", nullable: false),
+                    xmin = table.Column<uint>(type: "xid", rowVersion: true, nullable: false),
                     CreatedAtUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ModifiedAtUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },

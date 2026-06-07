@@ -241,6 +241,64 @@ public sealed class ChangeBalancesCommandTests : NpgsqlIntegrationTestsBase<User
         ValidateIntegrationEvent(events[idUser2], idUser2);
     }
 
+    [Fact]
+    public async Task Command_Should_Save_Balance_Histories_Correctly()
+    {
+        // Arrange
+        var balanceLimit = 200m;
+
+        var balanceLimitProvider = new Mock<IBalanceLimitProvider>();
+        balanceLimitProvider.Setup(x => x.GetBalanceLimit()).Returns(balanceLimit);
+
+        var idUser1 = Guid.NewGuid();
+        var deltaUser1 = 50m;
+        var balanceBeforeUser1 = 100m;
+        var expectedBalanceUser1 = 150m;
+
+        var idUser2 = Guid.NewGuid();
+        var deltaUser2 = 70m;
+        var balanceBeforeUser2 = 60m;
+        var expectedBalanceUser2 = 130m;
+
+        using var context = CreateContext();
+
+        var user1 = CreateUser(idUser1, "Виктор", balanceBeforeUser1);
+        var user2 = CreateUser(idUser2, "Иван", balanceBeforeUser2);
+        context.Users.AddRange(user1, user2);
+
+        await context.SaveChangesAsync(CancellationToken.None);
+
+        var updateInfos = new[]
+        {
+            new BalanceUpdateInfo
+            {
+                UserId = user1.Id,
+                Delta = deltaUser1
+            },
+            new BalanceUpdateInfo
+            {
+                UserId = user2.Id,
+                Delta = deltaUser2
+            }
+        };
+
+        // Act
+        var command = new ChangeBalancesCommand(balanceLimitProvider.Object, updateInfos);
+
+        await command.ExecuteAsync(context, CancellationToken.None);
+        await context.SaveChangesAsync(CancellationToken.None);
+
+        // Assert
+        var balanceHistories = context.BalanceHistories.ToDictionary(u => u.UserId);
+
+        balanceHistories.Keys.Count.ShouldBe(2);
+
+        balanceHistories[idUser1].BalanceBefore.ShouldBe(balanceBeforeUser1);
+        balanceHistories[idUser1].BalanceAfter.ShouldBe(expectedBalanceUser1);
+        balanceHistories[idUser2].BalanceBefore.ShouldBe(balanceBeforeUser2);
+        balanceHistories[idUser2].BalanceAfter.ShouldBe(expectedBalanceUser2);
+    }
+
     private static void ValidateIntegrationEvent(IntegrationEventToSend integrationEvent, Guid userId)
     {
         integrationEvent.ShouldNotBeNull();

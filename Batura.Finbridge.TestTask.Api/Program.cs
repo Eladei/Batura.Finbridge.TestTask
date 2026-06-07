@@ -20,6 +20,7 @@ public class Program
         }
 
         app.UseMiddleware<RequestLoggingMiddleware>();
+        app.UseMiddleware<ErrorMiddleware>();
 
         app.UseHttpsRedirection();
 

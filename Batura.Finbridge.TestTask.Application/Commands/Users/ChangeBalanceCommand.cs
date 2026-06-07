@@ -2,6 +2,7 @@
 using Batura.Finbridge.TestTask.Application.IntegrationEvents;
 using Batura.Finbridge.TestTask.Application.Properties;
 using Batura.Finbridge.TestTask.Model;
+using Batura.Finbridge.TestTask.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Batura.Finbridge.TestTask.Application.Commands.Users;
@@ -32,12 +33,14 @@ public sealed class ChangeBalanceCommand : CommandBase<UserDbContext>
         _delta = delta;
     }
 
-    /// </inheritdoc>
+    /// <inheritdoc/>
     public override async Task ExecuteAsync(UserDbContext context, CancellationToken cancellationToken)
     {
         var user = await context.Users
             .FirstOrDefaultAsync(u => u.Id == _userId, cancellationToken)
             ?? throw new OperationLogicException(Resources.UserNotFoundById, _userId);
+
+        var r = user.Version;
 
         var balanceLimit = _balanceLimitProvider.GetBalanceLimit();
 
@@ -55,9 +58,20 @@ public sealed class ChangeBalanceCommand : CommandBase<UserDbContext>
         var balanceBefore = user.Balance;
         user.Balance = newBalance;
 
+        var operationDate = DateTime.UtcNow;
+
+        context.BalanceHistories.Add(new BalanceHistory
+        {
+            Id = Guid.NewGuid(),
+            UserId = _userId,
+            BalanceBefore = balanceBefore,
+            BalanceAfter = newBalance,
+            ChangedAtUtc = operationDate
+        });
+
         var balanceWasChangedEvent = new UserBalanceWasChangedIntegrationEvent(
             user.Id, user.FirstName, user.LastName, user.MiddleName, 
-            balanceBefore, newBalance, DateTime.UtcNow);
+            balanceBefore, newBalance, operationDate);
 
         var outboxEvent = IntegrationEventConverter.Convert(balanceWasChangedEvent);
 

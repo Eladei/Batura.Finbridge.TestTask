@@ -5,7 +5,7 @@
 /// </summary>
 /// <typeparam name="T">Тип контекста базы данных</typeparam>
 /// <typeparam name="R">Тип результата</typeparam>
-public interface IEfQuery<T, R>
+public interface IQuery<T, R>
 {
     /// <summary>
     /// Выполняет запрос

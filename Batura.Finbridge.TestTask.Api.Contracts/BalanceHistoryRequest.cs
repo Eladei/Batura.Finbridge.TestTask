@@ -8,10 +8,10 @@ public sealed record BalanceHistoryRequest
     /// <summary>
     /// Номер страницы
     /// </summary>
-    public int Page { get; init; }
+    public uint Page { get; init; }
 
     /// <summary>
     /// Количество записей на странице
     /// </summary>
-    public int HistoryItemsPerPage { get; init; }
+    public uint HistoryItemsPerPage { get; init; }
 }

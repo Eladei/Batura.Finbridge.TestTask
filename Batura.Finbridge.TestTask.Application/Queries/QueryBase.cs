@@ -7,7 +7,7 @@ namespace Batura.Finbridge.TestTask.Application.Queries;
 /// </summary>
 /// <typeparam name="T">Тип контекста базы данных</typeparam>
 /// <typeparam name="R">Тип результата</typeparam>
-public abstract class EfQueryBase<T, R> : IEfQuery<T, R> where T : DbContext
+public abstract class QueryBase<T, R> : IQuery<T, R> where T : DbContext
 {
     /// <inheritdoc />
     public abstract Task<R> ExecuteAsync(T context, CancellationToken cancellationToken = default);
