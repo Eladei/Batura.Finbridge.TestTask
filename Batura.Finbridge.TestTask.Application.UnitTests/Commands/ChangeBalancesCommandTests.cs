@@ -28,6 +28,7 @@ public sealed class ChangeBalancesCommandTests
         var exception = Assert.Throws<ArgumentNullException>(() 
             => new ChangeBalancesCommand(null!, balanceUpdateInfos));
 
+        exception.ShouldNotBeNull();
         exception.ParamName.ShouldBe("balanceLimitProvider");
     }
 
@@ -56,6 +57,7 @@ public sealed class ChangeBalancesCommandTests
         var exception = Assert.Throws<OperationLogicException>(()
             => new ChangeBalancesCommand(balanceLimitProvider.Object, balanceUpdateInfos));
 
+        exception.ShouldNotBeNull();
         exception.Message.ShouldBe(Resources.UsersDublicatedInBalanceUpdate);
     }
 }

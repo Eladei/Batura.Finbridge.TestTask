@@ -43,9 +43,9 @@ public sealed class ChangeBalanceCommandTests : NpgsqlIntegrationTestsBase<UserD
     public async Task Command_Should_Throw_OperationLogicException_When_New_Balance_Negative()
     {
         // Arrange
-        var delta = 100m;
+        var delta = -100m;
         var balanceBefore = 30m;
-        var expectedBalance = balanceBefore + delta;
+        var expectedBalance = -70m;
         var balanceLimit = 50m;
 
         var balanceLimitProvider = new Mock<IBalanceLimitProvider>();
@@ -68,6 +68,9 @@ public sealed class ChangeBalanceCommandTests : NpgsqlIntegrationTestsBase<UserD
         // Assert
         var exception = await Assert.ThrowsAsync<OperationLogicException>(
             () => command.ExecuteAsync(context, CancellationToken.None));
+
+        exception.ShouldNotBeNull();
+        exception.Message.ShouldBe(expectedError);
     }
 
     [Fact]
@@ -76,7 +79,7 @@ public sealed class ChangeBalanceCommandTests : NpgsqlIntegrationTestsBase<UserD
         // Arrange
         var delta = 100m;
         var balanceBefore = 30m;
-        var expectedBalance = balanceBefore + delta;
+        var expectedBalance = 130m;
         var balanceLimit = 50m;
 
         var balanceLimitProvider = new Mock<IBalanceLimitProvider>();
@@ -100,6 +103,7 @@ public sealed class ChangeBalanceCommandTests : NpgsqlIntegrationTestsBase<UserD
         var exception = await Assert.ThrowsAsync<OperationLogicException>(
             () => command.ExecuteAsync(context, CancellationToken.None));
 
+        exception.ShouldNotBeNull();
         exception.Message.ShouldBe(expectedError);
     }
 
@@ -109,7 +113,7 @@ public sealed class ChangeBalanceCommandTests : NpgsqlIntegrationTestsBase<UserD
         // Arrange
         var delta = 100m;
         var balanceBefore = 30m;
-        var expectedBalance = balanceBefore + delta;
+        var expectedBalance = 130m;
         var balanceLimit = 200m;
 
         var balanceLimitProvider = new Mock<IBalanceLimitProvider>();
@@ -131,19 +135,18 @@ public sealed class ChangeBalanceCommandTests : NpgsqlIntegrationTestsBase<UserD
         await context.SaveChangesAsync(CancellationToken.None);
 
         // Assert
-        var user = context.Users.FirstOrDefault();
+        var user = context.Users.FirstOrDefault(u => u.Id == newUser.Id);
 
         user.ShouldNotBeNull();
         user.Balance.ShouldBe(expectedBalance);
     }
 
     [Fact]
-    public async Task Command_Should_Save_UserBalanceWasChangedIntegrationEvent()
+    public async Task Command_Should_Save_UserBalanceWasChangedIntegrationEvent_Correctly()
     {
         // Arrange
         var delta = 100m;
         var balanceBefore = 30m;
-        var expectedBalance = balanceBefore + delta;
         var balanceLimit = 200m;
 
         var balanceLimitProvider = new Mock<IBalanceLimitProvider>();

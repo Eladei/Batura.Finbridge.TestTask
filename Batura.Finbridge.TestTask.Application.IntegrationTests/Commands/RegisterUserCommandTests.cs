@@ -47,6 +47,7 @@ public sealed class RegisterUserCommandTests : NpgsqlIntegrationTestsBase<UserDb
         var exception = await Assert.ThrowsAsync<OperationLogicException>(
             () => command.BeforeExecuteAsync(context, CancellationToken.None));
 
+        exception.ShouldNotBeNull();
         exception.Message.ShouldBe(expectedError);
     }
 

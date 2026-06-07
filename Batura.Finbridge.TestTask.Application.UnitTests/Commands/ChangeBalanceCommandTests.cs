@@ -20,6 +20,7 @@ public sealed class ChangeBalanceCommandTests
         var exception = Assert.Throws<ArgumentNullException>(() 
             => new ChangeBalanceCommand(null!, id, delta));
 
+        exception.ShouldNotBeNull();
         exception.ParamName.ShouldBe("balanceLimitProvider");
     }
 }
