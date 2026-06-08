@@ -14,4 +14,9 @@ public sealed class OutboxOptions
     /// Максимальное количество событий для резервирования за один раз
     /// </summary>
     public uint MaxEventsToReserve { get; set; }
+
+    /// <summary>
+    /// Периодичность запуска job отправки событий интеграции в шину
+    /// </summary>
+    public string IntegrationEventsSenderJobCron { get; set; } = null!;
 }

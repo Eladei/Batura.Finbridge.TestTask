@@ -61,6 +61,42 @@ namespace Batura.Finbridge.TestTask.Api.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Execution of job &apos;{0}&apos; was cancelled.
+        /// </summary>
+        internal static string JobCancelled {
+            get {
+                return ResourceManager.GetString("JobCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error executing job &apos;{0}&apos;.
+        /// </summary>
+        internal static string JobError {
+            get {
+                return ResourceManager.GetString("JobError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Execution of job &apos;{0}&apos; completed.
+        /// </summary>
+        internal static string JobFinished {
+            get {
+                return ResourceManager.GetString("JobFinished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Execution of job &apos;{0}&apos; started.
+        /// </summary>
+        internal static string JobStarted {
+            get {
+                return ResourceManager.GetString("JobStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Запрос завершен. StatusCode: {0}.
         /// </summary>
         internal static string RequestFinished {
