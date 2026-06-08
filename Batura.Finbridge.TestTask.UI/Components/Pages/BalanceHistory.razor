@@ -1,0 +1,64 @@
+﻿@page "/balanceHistory"
+@rendermode InteractiveServer
+@attribute [StreamRendering]
+
+<PageTitle>Баланс</PageTitle>
+
+<h1>История балансов</h1>
+
+@if (balanceHistory == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ФИО</th>
+                <th>Баланс до</th>
+                <th>Баланс после</th>
+                <th>Изменение</th>
+                <th>Дата изменения</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var historyItem in balanceHistory)
+            {
+                <tr>
+                    <td>@historyItem.FullName</td>
+                    <td>@historyItem.BalanceBefore</td>
+                    <td>@historyItem.BalanceAfter</td>
+                    <td>@historyItem.Delta</td>
+                    <td>@historyItem.ChangedAtUtc</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@inject IUserReader UserReader
+
+@code {
+    private BalanceHistoryViewModel[]? balanceHistory;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var request = new BalanceHistoryRequest 
+        { 
+            Page = 1,
+            HistoryItemsPerPage = 20
+        };
+
+        var data = await UserReader.GetBalanceHistory(request);
+
+        balanceHistory = data.History.Select(u => new BalanceHistoryViewModel
+        {
+            Id = u.Id,
+            FullName = u.FirstName + " " + u.LastName + " " + u.MiddleName,
+            BalanceBefore = u.BalanceBefore,
+            BalanceAfter = u.BalanceAfter,
+            ChangedAtUtc = u.ChangedAtUtc
+        }).ToArray();
+    }
+}
