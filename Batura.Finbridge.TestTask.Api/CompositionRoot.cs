@@ -1,4 +1,6 @@
-﻿using Batura.Finbridge.TestTask.Application;
+﻿using Batura.Finbridge.TestTask.Api.Jobs;
+using Batura.Finbridge.TestTask.Api.Jobs.Extensions;
+using Batura.Finbridge.TestTask.Application;
 using Batura.Finbridge.TestTask.Application.Commands;
 using Batura.Finbridge.TestTask.Application.Commands.Users;
 using Batura.Finbridge.TestTask.Application.Queries;
@@ -10,6 +12,7 @@ using Batura.Finbridge.TestTask.Model;
 using Confluent.Kafka;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Quartz;
 using Serilog;
 using Serilog.Events;
 using System.Reflection;
@@ -41,12 +44,11 @@ public static class CompositionRoot
 
         SetDbServices(appBuilder);
 
+        SetJobs(appBuilder);
+
         SetUpEventBus(appBuilder);
 
         SetBalanceOptions(appBuilder);
-
-        appBuilder.Services.Configure<OutboxOptions>(
-            appBuilder.Configuration.GetSection("Outbox"));
 
         appBuilder.Services.AddTransient<ICommandExecutor<UserDbContext>, CommandExecutor<UserDbContext>>();
 
@@ -73,7 +75,10 @@ public static class CompositionRoot
     /// <param name="appBuilder">Построитель приложения</param>
     private static void SetUpEventBus(WebApplicationBuilder appBuilder)
     {
-        appBuilder.Services.AddSingleton(provider =>
+        appBuilder.Services.Configure<KafkaOptions>(
+            appBuilder.Configuration.GetSection("Kafka"));
+
+        appBuilder.Services.AddSingleton<IIntegrationEventBus>(provider =>
         {
             var options = provider.GetRequiredService<IOptions<KafkaOptions>>().Value
                 ?? throw new InvalidOperationException("Не настроены параметры Kafka");
@@ -126,10 +131,37 @@ public static class CompositionRoot
         appBuilder.Services.AddTransient<ICorrelationContext, CorrelationContext>();
     }
 
+    /// <summary>
+    /// Настраивает фоновые jobs
+    /// </summary>
+    /// <param name="appBuilder">Построитель приложения</param>
+    private static void SetJobs(WebApplicationBuilder appBuilder)
+    {
+        appBuilder.Services.Configure<OutboxOptions>(
+            appBuilder.Configuration.GetSection("Outbox"));
+
+        var cron = appBuilder.Configuration
+            .GetSection("Outbox")
+            .Get<OutboxOptions>()?.IntegrationEventsSenderJobCron 
+            ?? throw new ArgumentNullException(
+                "Не определен cron службы отправки событрий интеграции в шину");
+
+        appBuilder.Services.AddQuartz(q =>
+        {
+            q.AddNewJob<OutboxIntegrationEventsSenderJob>(cron);
+        });
+
+        appBuilder.Services.AddQuartzHostedService(options =>
+        {
+            options.WaitForJobsToComplete = true;
+        });
+    }
+
     private static void SetBalanceOptions(WebApplicationBuilder appBuilder)
     {
         appBuilder.Services.Configure<BalanceOptions>(
             appBuilder.Configuration.GetSection("Balance"));
+
         appBuilder.Services.AddTransient<IBalanceLimitProvider, BalanceLimitProvider>();
     }
 }
