@@ -36,7 +36,7 @@ public sealed class KafkaEventBus : IIntegrationEventBus
     {
         try
         {
-            var serializedEvent = JsonSerializer.Serialize(integrationEvent);
+            var serializedEvent = JsonSerializer.Serialize(integrationEvent, integrationEvent.GetType());
             var message = new Message<string, string>
             {
                 Key = integrationEvent.EntityId.ToString(),

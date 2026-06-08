@@ -6,7 +6,7 @@ namespace Batura.Finbridge.TestTask.Application.Queries.Users;
 /// <summary>
 /// Запрос информации о пользователях
 /// </summary>
-public sealed class UsersQuery : EfPageQueryBase<UserDbContext, UserReadModel>
+public sealed class UsersQuery : PageQueryBase<UserDbContext, UserReadModel>
 {
     /// <summary>
     /// Создает объект класса <see cref="UsersQuery"/>
@@ -27,7 +27,7 @@ public sealed class UsersQuery : EfPageQueryBase<UserDbContext, UserReadModel>
         if (_elementsPerPage.HasValue)
             query = query.Take((int)_elementsPerPage);
 
-        var bookInfos = await query.Select(s => new UserReadModel
+        var userInfos = await query.Select(s => new UserReadModel
         {
             Id = s.Id,
             FirstName = s.FirstName,
@@ -39,7 +39,7 @@ public sealed class UsersQuery : EfPageQueryBase<UserDbContext, UserReadModel>
             RegisteredAtUtc = s.CreatedAtUtc
         }).ToArrayAsync(cancellationToken);
 
-        return bookInfos;
+        return userInfos;
     }
 
     /// <inheritdoc />

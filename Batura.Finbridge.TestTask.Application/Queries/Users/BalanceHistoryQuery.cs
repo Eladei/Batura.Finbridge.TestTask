@@ -6,7 +6,7 @@ namespace Batura.Finbridge.TestTask.Application.Queries.Users;
 /// <summary>
 /// Запрос информации об изменении баланса пользователей
 /// </summary>
-public sealed class BalanceHistoryQuery : EfPageQueryBase<UserDbContext, BalanceHistoryItemReadModel>
+public sealed class BalanceHistoryQuery : PageQueryBase<UserDbContext, BalanceHistoryItemReadModel>
 {
     /// <summary>
     /// Создает объект класса <see cref="BalanceHistoryQuery"/>

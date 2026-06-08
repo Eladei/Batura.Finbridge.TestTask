@@ -16,7 +16,7 @@ namespace Batura.Finbridge.TestTask.Application.Commands;
 public class CommandExecutor<T> : ICommandExecutor<T> where T : DbContext
 {
     protected readonly IDbContextFactory<T> _contextFactory;
-    protected readonly ILogger? _logger;
+    protected readonly ILogger<CommandExecutor<T>>? _logger;
 
     /// <summary>
     /// Создаёт экземпляр исполнителя команд EF
@@ -25,7 +25,7 @@ public class CommandExecutor<T> : ICommandExecutor<T> where T : DbContext
     /// <param name="logger">Опциональный логгер</param>
     public CommandExecutor(
         IDbContextFactory<T> contextFactory,
-        ILogger? logger = null)
+        ILogger<CommandExecutor<T>>? logger = null)
     {
         _contextFactory = contextFactory
             ?? throw new ArgumentNullException(nameof(contextFactory));

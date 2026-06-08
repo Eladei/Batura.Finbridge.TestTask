@@ -142,6 +142,41 @@ public sealed class ChangeBalanceCommandTests : NpgsqlIntegrationTestsBase<UserD
     }
 
     [Fact]
+    public async Task Command_Should_Save_Balance_History_Correctly()
+    {
+        // Arrange
+        var delta = 100m;
+        var balanceBefore = 30m;
+        var expectedBalance = 130m;
+        var balanceLimit = 200m;
+
+        var balanceLimitProvider = new Mock<IBalanceLimitProvider>();
+        balanceLimitProvider.Setup(x => x.GetBalanceLimit()).Returns(balanceLimit);
+
+        using var context = CreateContext();
+
+        var newUser = CreateUser();
+        newUser.Balance = balanceBefore;
+        context.Users.Add(newUser);
+
+        await context.SaveChangesAsync(CancellationToken.None);
+
+        // Act
+        var command = new ChangeBalanceCommand(
+            balanceLimitProvider.Object, newUser.Id, delta);
+
+        await command.ExecuteAsync(context, CancellationToken.None);
+        await context.SaveChangesAsync(CancellationToken.None);
+
+        // Assert
+        var user = context.BalanceHistories.FirstOrDefault(u => u.UserId == newUser.Id);
+
+        user.ShouldNotBeNull();
+        user.BalanceBefore.ShouldBe(balanceBefore);
+        user.BalanceAfter.ShouldBe(expectedBalance);
+    }
+
+    [Fact]
     public async Task Command_Should_Save_UserBalanceWasChangedIntegrationEvent_Correctly()
     {
         // Arrange

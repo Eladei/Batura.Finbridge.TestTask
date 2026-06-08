@@ -27,6 +27,12 @@ public class UserDbContext : DbContext
             .Property(e => e.Version).IsRowVersion();
 
         modelBuilder.Entity<BalanceHistory>()
+            .Property(e => e.Version).IsRowVersion();
+
+        modelBuilder.Entity<IntegrationEventToSend>()
+            .Property(e => e.Version).IsRowVersion();
+
+        modelBuilder.Entity<BalanceHistory>()
             .HasOne(b => b.User)
             .WithMany(u => u.BalanceHistories)
             .HasForeignKey(b => b.UserId)

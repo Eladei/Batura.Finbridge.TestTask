@@ -8,10 +8,10 @@ public sealed record UsersRequest
     /// <summary>
     /// Номер страницы
     /// </summary>
-    public int Page { get; init; }
+    public uint Page { get; init; }
 
     /// <summary>
     /// Количество пользователей на странице
     /// </summary>
-    public int UsersPerPage { get; init; }
+    public uint UsersPerPage { get; init; }
 }

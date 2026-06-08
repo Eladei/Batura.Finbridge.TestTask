@@ -7,7 +7,7 @@ namespace Batura.Finbridge.TestTask.Application.Queries;
 /// </summary>
 /// <typeparam name="T">Тип контекста базы данных</typeparam>
 /// <typeparam name="R">Тип элемента результата</typeparam>
-public abstract class EfPageQueryBase<T, R> : EfQueryBase<T, PageResult<R>> where T : DbContext
+public abstract class PageQueryBase<T, R> : QueryBase<T, PageResult<R>> where T : DbContext
 {
     private readonly uint _page;
     protected readonly uint? _elementsPerPage;
@@ -57,7 +57,7 @@ public abstract class EfPageQueryBase<T, R> : EfQueryBase<T, PageResult<R>> wher
     /// <param name="elementsPerPage">Количество элементов на страницу</param>
     /// <param name="page">Номер страницы</param>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
-    protected EfPageQueryBase(uint? elementsPerPage = null, uint? page = null)
+    protected PageQueryBase(uint? elementsPerPage = null, uint? page = null)
     {
         if (elementsPerPage.HasValue)
             ArgumentOutOfRangeException.ThrowIfZero(elementsPerPage.Value);

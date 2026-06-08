@@ -8,10 +8,10 @@ namespace Batura.Finbridge.TestTask.Application.Queries;
 /// Исполнитель запросов для работы с Entity Framework
 /// </summary>
 /// <typeparam name="T">Тип контекста базы данных</typeparam>
-public class EfQueryExecutor<T> : IEfQueryExecutor<T> where T : DbContext
+public class QueryExecutor<T> : IQueryExecutor<T> where T : DbContext
 {
     protected readonly IDbContextFactory<T> _contextFactory;
-    protected readonly ILogger? _logger;
+    protected readonly ILogger<QueryExecutor<T>>? _logger;
 
     /// <summary>
     /// Создаёт экземпляр исполнителя запросов EF
@@ -19,7 +19,7 @@ public class EfQueryExecutor<T> : IEfQueryExecutor<T> where T : DbContext
     /// <param name="contextFactory">Фабрика контекста базы данных</param>
     /// <param name="logger">Опциональный логгер</param>
     /// <exception cref="ArgumentNullException"></exception>
-    public EfQueryExecutor(IDbContextFactory<T> contextFactory, ILogger? logger = null)
+    public QueryExecutor(IDbContextFactory<T> contextFactory, ILogger<QueryExecutor<T>>? logger = null)
     {
         _contextFactory = contextFactory
             ?? throw new ArgumentNullException(nameof(contextFactory));
@@ -28,7 +28,7 @@ public class EfQueryExecutor<T> : IEfQueryExecutor<T> where T : DbContext
     }
 
     /// <inheritdoc />
-    public virtual async Task<R> ExecuteAsync<R>(IEfQuery<T, R> query, CancellationToken cancellationToken)
+    public virtual async Task<R> ExecuteAsync<R>(IQuery<T, R> query, CancellationToken cancellationToken)
     {
         var queryName = query.GetType().Name;
 

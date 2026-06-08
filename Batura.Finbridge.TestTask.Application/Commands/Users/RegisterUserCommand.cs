@@ -49,7 +49,7 @@ public sealed class RegisterUserCommand : CommandBase<UserDbContext>
         _birthPlace = birthPlace;
     }
 
-    /// </inheritdoc>
+    /// <inheritdoc/>
     public override async Task BeforeExecuteAsync(UserDbContext context, CancellationToken cancellationToken)
     {
         var userExists = await context.Users
@@ -69,7 +69,7 @@ public sealed class RegisterUserCommand : CommandBase<UserDbContext>
         }
     }
 
-    /// </inheritdoc>
+    /// <inheritdoc/>
     public override async Task ExecuteAsync(UserDbContext context, CancellationToken cancellationToken)
     {
         var newUser = new User
