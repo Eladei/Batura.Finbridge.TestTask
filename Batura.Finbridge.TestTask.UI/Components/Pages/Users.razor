@@ -1,0 +1,64 @@
+﻿@page "/users"
+@rendermode InteractiveServer
+@attribute [StreamRendering]
+
+<PageTitle>Пользователи</PageTitle>
+
+<h1>Пользователи</h1>
+
+@if (users == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ФИО</th>
+                <th>Дата рождения</th>
+                <th>Место рождения</th>
+                <th>Баланс</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in users)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.FullName</td>
+                    <td>@user.BirthDate.ToShortDateString()</td>
+                    <td>@user.BirthPlace</td>
+                    <td>@user.Balance</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@inject IUserReader UserReader
+
+@code {
+    private UserRowViewModel[]? users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var request = new UsersRequest 
+        { 
+            Page = 1,
+            UsersPerPage = 100
+        };
+
+        var data = await UserReader.GetUsers(request);
+
+        users = data.Users.Select(u => new UserRowViewModel
+        {
+            Id = u.Id,
+            FullName = u.FirstName + " " + u.LastName + " " + u.MiddleName,
+            BirthDate = u.BirthDate,
+            BirthPlace = u.BirthPlace,
+            Balance = u.Balance
+        }).ToArray();
+    }
+}
